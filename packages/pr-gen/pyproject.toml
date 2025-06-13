@@ -1,0 +1,110 @@
+[tool.coverage.run]
+branch = true
+source = ["pr_gen"]
+
+[tool.coverage.report]
+exclude_lines = ['if TYPE_CHECKING:']
+show_missing = true
+
+[tool.pytest.ini_options]
+addopts = """
+ --cov
+ --cov-report html:'../coverage/pr-gen/html'
+ --cov-report xml:'../coverage/pr-gen/coverage.xml'
+ --html='../reports/pr-gen/unittests/html/index.html'
+ --junitxml='../reports/pr-gen/unittests/junit.xml'
+"""
+
+[project]
+name = "prgen"
+version = "0.4.0"
+description = "Generate pull request descriptions from git commit history"
+readme = "README.md"
+requires-python = ">=3.9,<4"
+license = "MIT"
+authors = [
+  { name = "Saleh Chaaban", email = "info@saleh-chaaban.de" },
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+]
+dependencies = [
+  "gitpython>=3.1.44",
+  "questionary>=1.10.0",
+  "llm-connection>=1.0.0",
+  "tqdm>=4.65.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/SkySC/prgen"
+Issues   = "https://github.com/SkySC/prgen/issues"
+
+[project.scripts]
+prgen = "pr_gen.main:main"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+  "pr_gen",
+  "prgen",
+  "prgen.templates",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[dependency-groups]
+dev = [
+  "autopep8>=2.3.1",
+  "ruff>=0.8.2",
+  "pytest>=8.3.4",
+  "pytest-sugar>=1.0.0",
+  "pytest-cov>=6.0.0",
+  "pytest-html>=4.1.1",
+  "black>=23.3.0",
+  "flake8>=5.0.4",
+  "types-tqdm>=4.65.0",
+]
+
+[build-system]
+requires = [
+  "hatchling",
+  "setuptools>=42",
+  "wheel",
+]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+exclude = [
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  "dist",
+]
+line-length = 88
+indent-width = 4
+
+[tool.ruff.lint]
+select = [
+  # pycodestyle
+  "E",
+  # Pyflakes
+  "F",
+  # pyupgrade
+  "UP",
+  # flake8-bugbear
+  "B",
+  # flake8-simplify
+  "SIM",
+  # isort
+  "I",
+]
+ignore    = []
+fixable   = ["ALL"]
+unfixable = []
+
+[tool.black]
+line-length = 80
+preview = true
+enable-unstable-feature = ["string_processing"]

@@ -4,9 +4,20 @@
 dist
 tmp
 out-tsc
+build/
+wheels/
 
 # dependencies
 node_modules
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+*.egg-info
+.mypy_cache/
+
+# Virtual environments
+.venv
 
 # IDEs and editors
 /.idea
@@ -38,5 +49,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# Nx cache
 .nx/cache
 .nx/workspace-data
